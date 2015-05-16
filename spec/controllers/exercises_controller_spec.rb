@@ -9,4 +9,21 @@ RSpec.describe ExercisesController, type: :controller do
     end
 
   end
+
+  describe 'GET #show'
+    it 'returns a single exercise as json' do
+
+      test_exercise = {
+                        name: 'shoulder press',
+                        description: 'push them thangs',
+                        image: 'some file name'
+                      }
+
+      Exercises.create(test_exercise)
+
+      get :show
+
+      expect(response.body).to be_json_eql(test_exercise.to_json)
+    end
+  end
 end
