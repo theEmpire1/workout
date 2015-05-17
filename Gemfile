@@ -36,6 +36,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'seed-fu'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
@@ -46,5 +47,10 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+group :test do
+  gem 'json_spec'
+end
+
 end
 
