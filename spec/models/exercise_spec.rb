@@ -1,5 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Exercise, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has a valid factory' do
+    test_exercise = FactoryGirl.build(:exercise)
+
+    expect(test_exercise).to be_valid
+  end
+
+  it 'does not allow invalid exercises' do
+    test_exercise = FactoryGirl.build(:invalid_exercise)
+
+    expect(test_exercise).not_to be_valid
+  end
 end
