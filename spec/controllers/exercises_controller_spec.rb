@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ExercisesController, type: :controller do
+  before(:each) do
+    @exercise = FactoryGirl.create(:exercise)
+  end
 
   describe "GET #index" do
     it "returns http success" do
@@ -8,20 +11,16 @@ RSpec.describe ExercisesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
+    it 'returns all exercises' do
+      pending("need to figure out how to search on exercises")
+    end
+
   describe 'GET #show'
     it 'returns a single exercise as json' do
 
-      exercise_params = {
-                        name: 'shoulder press',
-                        description: 'push them thangs',
-                        image: 'some file name'
-                      }
+      get :show, id: @exercise.id
 
-      test_exercise = Exercises.create(test_exercise)
-
-      get :show, id: test_exercise.id
-
-      expect(response.body).to be_json_eql(test_exercise.to_json)
+      expect(response.body).to be_json_eql(@exercise.to_json)
     end
   end
 end

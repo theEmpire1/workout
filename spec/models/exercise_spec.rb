@@ -1,15 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Exercise, type: :model do
-  it 'has a valid factory' do
-    test_exercise = FactoryGirl.build(:exercise)
+  let(:valid_params) { {title: 'test title', description: 'test desc', image: 'test image'} }
+  let(:invalid_params) { {title: 'test title', description: 'test desc'} }
 
-    expect(test_exercise).to be_valid
+  before(:each) do
+    @exercise = Exercise.create(valid_params)
+    @invalid_exercise = Exercise.new(invalid_params)
   end
 
-  it 'does not allow invalid exercises' do
-    test_exercise = FactoryGirl.build(:invalid_exercise)
+    it 'has a valid factory' do
+      expect(@exercise).to be_valid
+    end
 
-    expect(test_exercise).not_to be_valid
-  end
+    it 'does not allow invalid exercises' do
+      expect(@invalid_exercise).not_to be_valid
+    end
+
+    it 'returns an Exercise object with populated values' do
+      result = Exercise.find(@exercise.id)
+      expect(result).to eql(@exercise)
+    end
 end
