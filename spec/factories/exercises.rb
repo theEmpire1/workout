@@ -1,12 +1,12 @@
 FactoryGirl.define do
   factory :exercise, class: Exercise do
-    title 'Shoulder Press'
-    description 'Push the weight up with your shoulders'
-    image 'Some image file'
+    title Faker::Lorem.word
+    description Faker::Lorem.sentence
+    image Faker::Avatar.image
   end
 
   factory :invalid_exercise, class: Exercise do
-    title 'Shoulder Press'
-    image 'Some image file'
+    title Faker::Lorem.word
+    image Faker::Avatar.image
   end
 end
