@@ -87,6 +87,7 @@ GEM
     json_spec (1.1.4)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
+    jwt (1.5.0)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -218,6 +219,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   json_spec
+  jwt
   mysql2
   pry
   rails (= 4.2.1)
