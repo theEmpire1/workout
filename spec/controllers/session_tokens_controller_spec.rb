@@ -12,8 +12,11 @@ describe SessionTokensController, type: :controller do
   describe '#create' do
     it 'responds with a JWT' do
       post :create
+      token = JSON.parse(response.body)['token']
 
-      expect(response.body['token']).to eql('foo')
+      expect(token).to be_kind_of(String)
+      segments = token.split('.')
+      expect(segments.size).to eql(3)
     end
   end
 end
