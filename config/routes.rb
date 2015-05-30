@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'exercises/index'
   get 'exercises/:id' => 'exercises#show'
   post 'exercises' => 'exercises#create'
+  resources :session_tokens, defaults: { format: 'json' }, only: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

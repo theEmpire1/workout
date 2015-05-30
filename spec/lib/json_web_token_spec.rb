@@ -3,13 +3,22 @@ require 'json_web_token'
 
 describe JsonWebToken do
   let(:payload) { { 'user_id' => 1 } }
-  let(:token) { "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0MzI5NTAzNTd9.X__oxn39N8r2wKT1WM5d8YkUZkGR8oDvGCPjquA_3Ts" }
-
+  let(:token) { JsonWebToken.encode(payload) }
   describe '#encode' do
     it 'does not leave un-encrypted payload information' do
-      token = JsonWebToken.encode(payload)
-
       expect(token).not_to include('user_id')
+    end
+  end
+
+  describe '#decode' do
+    it 'returns a human-readable payload' do
+      expected_payload = JsonWebToken.decode(token)
+      expect(expected_payload['user_id']).to eql(payload['user_id'])
+    end
+
+    it 'has the correct expiry' do
+      expected_payload = JsonWebToken.decode(token)
+      expect(expected_payload['exp']).to eql(24.hours.from_now.to_i)
     end
   end
 end
