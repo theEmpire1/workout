@@ -19,4 +19,21 @@ describe SessionTokensController, type: :controller do
       expect(segments.size).to eql(3)
     end
   end
+
+  describe '#show' do
+    it 'returns the logged-in status' do
+      get :show
+      status = JSON.parse(response.body)['logged_in']
+
+      expect(status).to be true
+    end
+
+    it 'raises an exception if the user is unauthenticated' do
+      sign_out current_user
+
+      expect do
+        get :show
+      end.to raise_error
+    end
+  end
 end
